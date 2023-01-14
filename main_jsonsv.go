@@ -40,7 +40,12 @@ func main() {
 	}
 
 	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		fmt.Println("Get /")
+		return c.String(http.StatusOK, "hello")
+	})
 	e.POST("/", func(c echo.Context) error {
+		fmt.Println("Post /")
 		return c.Blob(http.StatusOK, echo.MIMEApplicationJSONCharsetUTF8, bytes)
 	})
 	e.Logger.Fatal(e.Start(":" + port))
